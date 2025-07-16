@@ -1,0 +1,9 @@
+services:
+  o365_enrichment:
+    build: ./o365_enricher
+    restart: always    
+    container_name: elastic-o365enrich
+    hostname: elastic-o365enrich
+    command: "python3 enrichUsers.py -t=${ENRICH_TENANT_ID} -ci=${ENRICH_CLIENT_ID} -cs=${ENRICH_CLIENT_SECRET} -eo=${ENRICH_ELASTIC_OUTPUT} -eapi=${ENRICH_ELASTIC_API_KEY}"
+    volumes:
+      - ./o365_enricher/enrichUsers.py:/enrichUsers.py # persistent
